@@ -1,0 +1,14 @@
+<button (click)="goToCreateDeck()">Create Deck</button>
+<input type="text" class="joinInputField" [formControl]="joinNumber" placeholder="enter The code for Joining">
+<div *ngIf="decks.length >= 0" class="container">
+    <div *ngFor="let deck of decks">
+      <div class="deck">
+    <h3>{{deck.deckname}}</h3>
+  <img mat-card-image [src]="deck.img" [alt]="'image of the '+ deck.deckname + ' deck'">
+  <div class="actions">
+    <button (click)="createNewSession(deck)">New Session</button>
+    <button (click)="joinNewSession(deck)">Join</button>
+  </div>
+  </div>
+    </div>
+</div>

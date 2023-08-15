@@ -1,0 +1,11 @@
+<form [formGroup]="form">
+  <input type="text" placeholder="deckName" formControlName="deckname" >
+  <span class="error" *ngIf="form.get('deckname')?.hasError('required')">You need to enter a deckname</span>
+  <textarea formControlName="decklist" placeholder="list of the deck" cols="30" rows="10"></textarea>
+  <span class="error" *ngIf="form.get('decklist')?.hasError('required')">You need to enter a deckname</span>
+</form>
+<pre>{{form.value | json}}</pre>
+<div class="buttonContainer">
+  <button (click)="cancel()">Cancel</button>
+  <button (click)="createDeck()">Create</button>
+</div>

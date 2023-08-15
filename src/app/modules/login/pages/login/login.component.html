@@ -1,0 +1,14 @@
+<div class="body"></div>
+		<div class="grad"></div>
+		<div class="header">
+            <div *ngIf="register"> Register for: </div>
+            <div *ngIf="!register"> Login for: </div>
+			<div>MTG<span>-O2</span></div>
+		</div>
+		<br>
+		<form class="login" [formGroup]="form">
+			<input type="text" formControlName="username" matInput placeholder="username">
+			<input type="password" formControlName="password"  matInput placeholder="password" ><br>
+			<a (click)="toggleRegister()">{{register ? 'Login': 'Register'}}</a>
+			<input type="button" [value]="register ? 'Register' : 'Login' " (click)="login()">
+		</form>
