@@ -40,4 +40,7 @@ constructor(private readonly http: HttpClient) { }
   createSession(deck: string, key: string){
     return this.http.post('http://localhost:5000/create_session', {deck, key})
   }
+  joinSession(deck: string, key: string, code: string){
+    return this.http.post('http://localhost:5000/join_session', {deck, key, code})
+  }
 }

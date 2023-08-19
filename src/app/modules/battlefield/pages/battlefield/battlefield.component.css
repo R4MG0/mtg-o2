@@ -2,13 +2,13 @@
     cursor: pointer;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     position: absolute;
     bottom: 0;
     /* height: 10em; */
     width: fit-content;
 
-    
+
 }
 img {
         /* height: 10px; */

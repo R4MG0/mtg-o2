@@ -18,17 +18,18 @@ export class LoginComponent {
     password: new FormControl('', Validators.required)
   })
 
-  constructor(private readonly loginService: LoginService, private readonly router: Router ) { 
+  constructor(private readonly loginService: LoginService, private readonly router: Router ) {
   }
   login(){
     const user: User = {
       username: this.form.value.username as string,
-      password: this.form.value.password as string 
+      password: this.form.value.password as string
     };
     if(!this.register){
     this.loginService.login(user).subscribe((response: any) =>{
       if(response.key !== undefined) {
         localStorage.setItem('key', response.key)
+        localStorage.setItem('username', this.form.value.username as string)
         this.router.navigate(['/decks'])
         return
      } return alert('Invalid username or password')
