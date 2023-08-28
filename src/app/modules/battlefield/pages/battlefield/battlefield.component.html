@@ -4,10 +4,55 @@
 <div class="enemyHand">
     <p>Amount of enemy Cards: {{amountOfEnemyCards}}</p>
 </div>
-<div class="hand1">
+<!-- <div class="hand1">
   <div *ngFor="let card of cardsPlayer1">
     <img [src]="card.img" alt="card image">
   </div>
-</div>
+</div> -->
 <button (click)="drawXCards(1)">Draw Card</button>
 <img src="https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg/revision/latest?cb=20140813141013" alt="back of a magic card">
+
+<div cdkDropListGroup>
+  <div class="example-container">
+    <h2>Hand</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="cardsPlayer1"
+      class="example-list"
+      cdkDragBoundary=".example-container"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let card of cardsPlayer1" cdkDrag>
+        <img [src]="card.img" alt="card image">
+      </div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Battlefield</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="battlefield"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let card of battlefield" cdkDrag>
+        <img [src]="card.img" alt="card image">
+</div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Graveyard</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="graveyard"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let card of graveyard" cdkDrag>
+          <img [src]="card.img" alt="card image">
+      </div>
+    </div>
+  </div>
+</div>

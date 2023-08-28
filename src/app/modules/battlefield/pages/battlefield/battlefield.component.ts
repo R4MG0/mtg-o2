@@ -3,6 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Card } from 'src/app/core/http/interfaces/card';
 import { GameService } from 'src/app/core/http/services/game.service';
 import { WebsocketsService } from 'src/app/core/http/services/websockets.service';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDropList,
+  CdkDropListGroup,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-battlefield',
@@ -21,6 +29,22 @@ export class BattlefieldComponent implements OnInit {
   amountOfEnemyCards = 0;
 
   receivedMessages: string[] = [];
+
+  battlefield : Card[] = [];
+  graveyard: Card[] = []
+
+  drop(event: CdkDragDrop<any>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
 
 
   constructor(private readonly route: ActivatedRoute, private readonly gameService: GameService, private readonly wsService: WebsocketsService) {
