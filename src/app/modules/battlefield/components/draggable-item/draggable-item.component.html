@@ -1,0 +1,8 @@
+<div
+      class="draggable-item"
+      [ngStyle]="{'left.px': positionX, 'top.px': positionY}"
+      (mousedown)="onMouseDown($event)"
+      (document:mouseup)="onMouseUp($event)"
+      (document:mousemove)="onMouseMove($event)">
+      {{ content }}
+    </div>

@@ -1,0 +1,7 @@
+ <div class="context-menu" [style.left.px]="x" [style.top.px]="y" *ngIf="visible">
+      <ul>
+        <li *ngFor="let item of items" (click)="onItemClick(item)">
+          {{ item }}
+        </li>
+      </ul>
+    </div>
