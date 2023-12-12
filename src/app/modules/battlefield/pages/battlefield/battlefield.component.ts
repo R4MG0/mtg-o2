@@ -11,6 +11,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-battlefield',
@@ -33,18 +34,8 @@ export class BattlefieldComponent implements OnInit {
   battlefield : Card[] = [];
   graveyard: Card[] = []
 
-  drop(event: CdkDragDrop<any>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    }
-  }
+  items: MenuItem[] | undefined;
+
 
 
   constructor(private readonly route: ActivatedRoute, private readonly gameService: GameService, private readonly wsService: WebsocketsService) {
@@ -78,6 +69,10 @@ export class BattlefieldComponent implements OnInit {
       }
         // this.amountOfEnemyCards += 1
     });
+    this.items = [
+            { label: 'View', icon: 'pi pi-fw pi-search' },
+            { label: 'Delete', icon: 'pi pi-fw pi-trash' }
+        ];
 
 
     // console.log(this.wsService.socket.readyState, 'airsentioarsntio')
@@ -97,5 +92,16 @@ export class BattlefieldComponent implements OnInit {
    sendMessage(): void {
     const message = `${this.user.code}`;
     this.wsService.sendMessage(message);
+  }
+
+  moveTo(field: string, card: Card) {
+    if (field === 'battlefield') {
+      this.battlefield.push(card)
+      this.cardsPlayer1.splice(this.cardsPlayer1.indexOf(card), 1)
+    }
+    if (field === 'graveyard') {
+      this.graveyard.push(card)
+      this.battlefield.splice(this.battlefield.indexOf(card), 1)
+    }
   }
 }

@@ -11,59 +11,35 @@
 </div> -->
 <button (click)="drawXCards(1)">Draw Card</button>
 
-
 <div>
-  <app-container>
-    <app-draggable-item content="Card 1" [ngStyle]="{'left.px': 20, 'top.px': 20}"></app-draggable-item>
-    <app-draggable-item content="Card 2" [ngStyle]="{'left.px': 150, 'top.px': 80}"></app-draggable-item>
-  </app-container>
-
-  <app-container>
-    <!-- You can drop items here -->
-  </app-container>
-</div>
-
-<!-- <div cdkDropListGroup>
   <div class="example-container">
     <h2>Battlefield</h2>
 
-    <div
-      cdkDropList
-      [cdkDropListData]="battlefield"
-      class="cardsContainer example-list"
-      (cdkDropListDropped)="drop($event)"
-    >
+    <div class="cardsContainer example-list">
       <div class="example-box" *ngFor="let card of battlefield" cdkDrag>
-        <img [src]="card.img" alt="card image" />
+        <img #img [src]="card.img" alt="card image" />
+        <p-contextMenu [target]="img" [model]="items"></p-contextMenu>
       </div>
     </div>
   </div>
   <div class="example-container">
     <h2>Hand</h2>
 
-    <div
-      class="cardsContainer example-list"
-      cdkDropList
-      [cdkDropListData]="cardsPlayer1"
-      cdkDragBoundary=".example-container"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <div class="cards" *ngFor="let card of cardsPlayer1" cdkDrag>
-        <img [src]="card.img" alt="card image" />
+    <div class="cardsContainer example-list">
+      <div class="cards" *ngFor="let card of cardsPlayer1">
+        <img #img2 [src]="card.img" alt="card image" />
+        <button (click)="moveTo('battlefield', card)">Play</button>
       </div>
     </div>
   </div>
-   <div class="example-container">
+  <!-- <div class="example-container">
     <h2>Graveyard</h2>
 
-    <div
-      cdkDropList
-      [cdkDropListData]="graveyard"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let card of graveyard" cdkDrag>
-          <img [src]="card.img" alt="card image">
+    <div class="example-list">
+      <div class="example-box" *ngFor="let card of graveyard">
+        <img [src]="card.img" alt="card image" />
       </div>
     </div>
   </div> -->
-<!-- </div> -->
+  <!-- </div> -->
+</div>

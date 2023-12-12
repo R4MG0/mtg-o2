@@ -10,9 +10,9 @@ export class LoginService {
   constructor(private readonly http: HttpClient) { }
 
   login(user: User){
-    return this.http.post('http://localhost:5000/login', user);
+    return this.http.post('http://127.0.0.1:5000/login', user);
   }
   register(user: User){
-    return this.http.post('http://localhost:5000/register', user);
+    return this.http.post('http://127.0.0.1:5000/register', user);
   }
 }

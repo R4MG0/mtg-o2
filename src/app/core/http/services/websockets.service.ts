@@ -12,7 +12,7 @@ private connected =false
   constructor() { }
 
   connect(code: string): void {
-    this.socket = new WebSocket('ws://localhost:5678');
+    this.socket = new WebSocket('ws://127.0.0.1:5678');
 
     this.socket.onopen = () => {
       console.log('WebSocket connection established.');

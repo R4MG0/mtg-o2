@@ -14,7 +14,7 @@ constructor(private readonly http: HttpClient) { }
     const deckWithKey = {
       ...deck, key: key
     }
-    return this.http.post('http://localhost:5000/create_deck', deckWithKey)
+    return this.http.post('http://127.0.0.1:5000/create_deck', deckWithKey)
   }
 
   getDecks(key: Key){
@@ -38,9 +38,9 @@ constructor(private readonly http: HttpClient) { }
     // return of({message: hello})
   }
   createSession(deck: string, key: string){
-    return this.http.post('http://localhost:5000/create_session', {deck, key})
+    return this.http.post('http://127.0.0.1:5000/create_session', {deck, key})
   }
   joinSession(deck: string, key: string, code: string){
-    return this.http.post('http://localhost:5000/join_session', {deck, key, code})
+    return this.http.post('http://127.0.0.1:5000/join_session', {deck, key, code})
   }
 }

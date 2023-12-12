@@ -20,7 +20,7 @@ constructor(private readonly http: HttpClient, private readonly wsService: Webso
 }
 
     drawCards(userkey: string, deckname: string, gameCode: string, amount: number) {
-      return this.http.post(`http://localhost:5000/draw`, {key: userkey, deck: deckname, code: gameCode, amount })
+      return this.http.post(`http://127.0.0.1:5000/draw`, {key: userkey, deck: deckname, code: gameCode, amount })
     }
 
 }
