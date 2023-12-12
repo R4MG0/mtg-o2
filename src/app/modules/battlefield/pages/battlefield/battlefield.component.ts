@@ -3,15 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Card } from 'src/app/core/http/interfaces/card';
 import { GameService } from 'src/app/core/http/services/game.service';
 import { WebsocketsService } from 'src/app/core/http/services/websockets.service';
-import {
-  CdkDrag,
-  CdkDragDrop,
-  CdkDropList,
-  CdkDropListGroup,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-battlefield',
@@ -70,8 +62,131 @@ export class BattlefieldComponent implements OnInit {
         // this.amountOfEnemyCards += 1
     });
     this.items = [
-            { label: 'View', icon: 'pi pi-fw pi-search' },
-            { label: 'Delete', icon: 'pi pi-fw pi-trash' }
+            {
+                label: 'File',
+                icon: 'pi pi-fw pi-file',
+                items: [
+                    {
+                        label: 'New',
+                        icon: 'pi pi-fw pi-plus',
+                        items: [
+                            {
+                                label: 'Bookmark',
+                                icon: 'pi pi-fw pi-bookmark'
+                            },
+                            {
+                                label: 'Video',
+                                icon: 'pi pi-fw pi-video'
+                            }
+                        ]
+                    },
+                    {
+                        label: 'Delete',
+                        icon: 'pi pi-fw pi-trash'
+                    },
+                    {
+                        separator: true
+                    },
+                    {
+                        label: 'Export',
+                        icon: 'pi pi-fw pi-external-link'
+                    }
+                ]
+            },
+            {
+                label: 'Move To',
+                icon: 'pi pi-fw pi-pencil',
+                items: [
+                    {
+                        label: 'Graveyard',
+                        command: (event) => this.handleContextMenu(event, 'graveyard'),
+                        icon: 'pi pi-fw pi-align-left'
+                    },
+                    {
+                        label: 'Exile',
+                        icon: 'pi pi-fw pi-align-right'
+                    },
+                    {
+                        label: 'Command zone',
+                        icon: 'pi pi-fw pi-align-center'
+                    },
+                    {
+                        label: 'Hand',
+                        icon: 'pi pi-fw pi-align-justify'
+                    }
+                ]
+            },
+            {
+                label: 'Users',
+                icon: 'pi pi-fw pi-user',
+                items: [
+                    {
+                        label: 'New',
+                        icon: 'pi pi-fw pi-user-plus'
+                    },
+                    {
+                        label: 'Delete',
+                        icon: 'pi pi-fw pi-user-minus'
+                    },
+                    {
+                        label: 'Search',
+                        icon: 'pi pi-fw pi-users',
+                        items: [
+                            {
+                                label: 'Filter',
+                                icon: 'pi pi-fw pi-filter',
+                                items: [
+                                    {
+                                        label: 'Print',
+                                        icon: 'pi pi-fw pi-print'
+                                    }
+                                ]
+                            },
+                            {
+                                icon: 'pi pi-fw pi-bars',
+                                label: 'List'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                label: 'Events',
+                icon: 'pi pi-fw pi-calendar',
+                items: [
+                    {
+                        label: 'Edit',
+                        icon: 'pi pi-fw pi-pencil',
+                        items: [
+                            {
+                                label: 'Save',
+                                icon: 'pi pi-fw pi-calendar-plus'
+                            },
+                            {
+                                label: 'Delete',
+                                icon: 'pi pi-fw pi-calendar-minus'
+                            }
+                        ]
+                    },
+                    {
+                        label: 'Archieve',
+                        icon: 'pi pi-fw pi-calendar-times',
+                        items: [
+                            {
+                                label: 'Remove',
+                                icon: 'pi pi-fw pi-calendar-minus'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                separator: true
+            },
+            {
+                label: 'Quit',
+                icon: 'pi pi-fw pi-power-off'
+            }
         ];
 
 
@@ -103,5 +218,30 @@ export class BattlefieldComponent implements OnInit {
       this.graveyard.push(card)
       this.battlefield.splice(this.battlefield.indexOf(card), 1)
     }
+  }
+
+  handleShow(event: any) {
+        console.log(event)
+    }
+  handleContextMenu(event: any, option: string): void {
+  console.log('Selected:', option);
+  const clickedItem = event.originalEvent.target; // Get the HTML element clicked on
+
+  // Find the card associated with the clicked context menu
+  const parentCard = clickedItem.closest('.example-box');
+  const cardIndex = Array.from(parentCard.parentElement.children).indexOf(parentCard);
+  const clickedCard = this.battlefield[cardIndex];
+
+  console.log('Clicked card:', clickedCard);
+  // Move the clicked card to the graveyard
+  if (option === 'graveyard') {
+    this.moveTo('graveyard', clickedCard);
+  }
+}
+
+
+  selectOption(option: string): void {
+    console.log('Selected:', option);
+    // Additional action when an option is selected
   }
 }

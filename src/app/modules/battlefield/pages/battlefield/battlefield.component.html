@@ -22,24 +22,31 @@
       </div>
     </div>
   </div>
-  <div class="example-container">
-    <h2>Hand</h2>
+  <div class="footer">
+    <div class="example-container">
+      <h2>Hand</h2>
 
-    <div class="cardsContainer example-list">
-      <div class="cards" *ngFor="let card of cardsPlayer1">
-        <img #img2 [src]="card.img" alt="card image" />
-        <button (click)="moveTo('battlefield', card)">Play</button>
+      <div class="cardsContainer example-list">
+        <div class="cards" *ngFor="let card of cardsPlayer1">
+          <img #imgCardHand [src]="card.img" alt="card image" />
+          <p-contextMenu [target]="imgCardHand" [model]="items"></p-contextMenu>
+          <p-button
+            (click)="moveTo('battlefield', card)"
+            label="Play"
+          ></p-button>
+        </div>
+      </div>
+    </div>
+    <div class="example-container">
+      <h2>Graveyard</h2>
+
+      <div class="example-list">
+        <img
+          *ngIf="graveyard.at(-1)"
+          [src]="graveyard.at(-1)?.img"
+          [alt]="graveyard.at(-1)?.name"
+        />
       </div>
     </div>
   </div>
-  <!-- <div class="example-container">
-    <h2>Graveyard</h2>
-
-    <div class="example-list">
-      <div class="example-box" *ngFor="let card of graveyard">
-        <img [src]="card.img" alt="card image" />
-      </div>
-    </div>
-  </div> -->
-  <!-- </div> -->
 </div>
