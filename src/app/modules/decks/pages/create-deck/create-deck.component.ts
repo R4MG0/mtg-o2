@@ -25,7 +25,9 @@ export class CreateDeckComponent implements OnInit {
     if (this.form.valid) {
     const tmpDeck = {
       deckname: this.form.value.deckname,
-      decklist: this.form.value.decklist
+      decklist: this.form.value.decklist,
+      commander: '',
+      format: 'commander'
     }
     this.deckService.generateDeck(tmpDeck as Deck, this.userKey as string).subscribe((response: any) => {
       if(response.message === 'success'){
@@ -33,7 +35,7 @@ export class CreateDeckComponent implements OnInit {
       }
     })}
   }
-  
+
   cancel() {
     this.form.reset();
     this.router.navigate(['/decks'])

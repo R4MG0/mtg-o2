@@ -29,6 +29,7 @@ export class DecksComponent implements OnInit {
     this.router.navigate(['/decks/create'])
   }
   createNewSession(deck: Deck) {
+    console.log(deck)
     this.deckService.createSession(deck.deckname, this.userKey.key as string).subscribe((response: any) => {
       localStorage.setItem('activeDeck', deck.deckname)
       localStorage.setItem('gameCode', response.code)

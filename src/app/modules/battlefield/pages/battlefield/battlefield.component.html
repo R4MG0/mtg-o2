@@ -40,12 +40,14 @@
     <div class="example-container">
       <h2>Graveyard</h2>
 
-      <div class="example-list">
+      <div class="example-list" *ngIf="graveyard.at(-1)">
+
         <img
-          *ngIf="graveyard.at(-1)"
+          #graveyardCard
           [src]="graveyard.at(-1)?.img"
           [alt]="graveyard.at(-1)?.name"
         />
+        <p-contextMenu [target]="graveyardCard" [model]="items"></p-contextMenu>
       </div>
     </div>
   </div>

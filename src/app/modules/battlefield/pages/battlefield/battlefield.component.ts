@@ -98,6 +98,11 @@ export class BattlefieldComponent implements OnInit {
                 icon: 'pi pi-fw pi-pencil',
                 items: [
                     {
+                        label: 'Battlefield',
+                        command: (event) => this.handleContextMenu(event, 'battlefield'),
+                        icon: 'pi pi-fw pi-align-left'
+                    },
+                    {
                         label: 'Graveyard',
                         command: (event) => this.handleContextMenu(event, 'graveyard'),
                         icon: 'pi pi-fw pi-align-left'
@@ -234,8 +239,16 @@ export class BattlefieldComponent implements OnInit {
 
   console.log('Clicked card:', clickedCard);
   // Move the clicked card to the graveyard
-  if (option === 'graveyard') {
-    this.moveTo('graveyard', clickedCard);
+  switch (option) {
+    case 'battlefield':
+      this.moveTo('battlefield', clickedCard);
+      break;
+    case 'graveyard':
+      this.moveTo('graveyard', clickedCard);
+      break;
+    case 'exile':
+      this.moveTo('exile', clickedCard);
+      break;
   }
 }
 
